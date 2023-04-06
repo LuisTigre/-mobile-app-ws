@@ -11,3 +11,12 @@
 	<artifactId>mysql-connector-j</artifactId>
 	<scope>runtime</scope>
 </dependency>
+
+# PostRequest
+
+{
+    "firstName":"Lewis",
+    "lastName":"Iigre",
+    "email":"test@test.com",
+    "password":"123"
+}

@@ -66,10 +66,10 @@ public class UserDto implements Serializable{
 	public void setEmailVerificatioToken(String emailVerificatioToken) {
 		this.emailVerificatioToken = emailVerificatioToken;
 	}
-	public String getEmailVerificatioStatus() {
+	public Boolean getEmailVerificatioStatus() {
 		return emailVerificatioStatus;
 	}
-	public void setEmailVerificatioStatus(String emailVerificatioStatus) {
+	public void setEmailVerificatioStatus(Boolean emailVerificatioStatus) {
 		this.emailVerificatioStatus = emailVerificatioStatus;
 	}
 	
