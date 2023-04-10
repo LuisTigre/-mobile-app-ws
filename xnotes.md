@@ -14,12 +14,22 @@
 
 # PostRequest
 
+#json format
 {
     "firstName":"Lewis",
     "lastName":"Iigre",
     "email":"test@test.com",
     "password":"123"
 }
+
+#xml format 
+
+<UserDetailsRequestModel>
+<firstName>Sergey</firstName>
+<lastName>Sergey</lastName>
+<email>test13@test.com</email>
+<password>123</password>
+</UserDetailsRequestModel>
 
 
 # WebSecurity
