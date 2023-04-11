@@ -31,6 +31,9 @@
 <password>123</password>
 </UserDetailsRequestModel>
 
+# command to execute jar file in cmd
+java -jar mobile-app-ws-0.0.1-SNAPSHOT.jar
+
 
 # WebSecurity
 
@@ -69,89 +72,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 }
 
 
-# AuthenticationManagerBuilder
 
-package com.apps.developerblog.app.ws.security;
-
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-
-
-import com.apps.developerblog.app.ws.service.UserService;
-
-@EnableWebSecurity
-public class WebSecurity {
-	
-	private final UserService userDetailsService;
-	private final BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	public WebSecurity( UserService userDetailsService,BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.userDetailsService = userDetailsService;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-		
-	}
-	
-	@Bean
-	protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
-		
-		// Configure Authentication ManagerBuilder
-		AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-		
-		authenticationManagerBuilder
-		.userDetailsService(userDetailsService)
-		.passwordEncoder(bCryptPasswordEncoder);
-		
-		
-		
-		http.csrf().disable()
-		.authorizeHttpRequests().antMatchers(HttpMethod.POST, SecurityConstants.SING_UP_URL).permitAll()
-		.anyRequest().authenticated().and().addFilter(new AuthenticationFilter());
-		
-		return http.build();
-	}
-	
-	
-
-}
-
-
-# Json parser
-
-private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-		
-		String token = request.getHeader(SecurityConstants.HEADER_STRING);
-		
-		if(token != null ) {
-			
-			token = token.replace(SecurityConstants.TOKEN_PREFIX, "");
-
-			String user = Jwts.parserBuilder()
-			        .setSigningKeyResolver(new SigningKeyResolverAdapter() {
-			            @Override
-			            public byte[] resolveSigningKeyBytes(JwsHeader header, Claims claims) {
-			                return SecurityConstants.TOKEN_SECRET.getBytes();
-			            }
-			        })
-			        .build()
-			        .parseClaimsJws(token)
-			        .getBody()
-			        .getSubject();
-			
-			if(user != null) {
-				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-			}
-			return null;
-		}
-		
-		return null;
-	}
 
 
