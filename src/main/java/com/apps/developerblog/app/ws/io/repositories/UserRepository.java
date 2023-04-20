@@ -10,5 +10,5 @@ import com.apps.developerblog.app.ws.shared.dto.UserDto;
 @Repository
 public interface UserRepository extends PagingAndSortingRepository<UserEntity, Long> {
 	UserEntity findByEmail(String email);
-	UserEntity findUserByUserId(String userId);
+	UserEntity findByUserId(String userId);
 }

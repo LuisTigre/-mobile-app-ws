@@ -2,9 +2,12 @@ package com.apps.developerblog.app.ws.ui.controller;
 
 
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apps.developerblog.app.ws.exceptions.UserServiceException;
+import com.apps.developerblog.app.ws.service.AddressService;
 import com.apps.developerblog.app.ws.service.UserService;
+import com.apps.developerblog.app.ws.shared.dto.AddressDTO;
 import com.apps.developerblog.app.ws.shared.dto.UserDto;
 import com.apps.developerblog.app.ws.ui.model.request.UserDetailsRequestModel;
+import com.apps.developerblog.app.ws.ui.model.response.AddressesRest;
 import com.apps.developerblog.app.ws.ui.model.response.ErrorMessages;
 import com.apps.developerblog.app.ws.ui.model.response.OperationsStatusModel;
 import com.apps.developerblog.app.ws.ui.model.response.RequestOperationStatus;
@@ -36,13 +42,19 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	AddressService addressesService;
+	
+	@Autowired
+	AddressService addressService;
+	
 	@GetMapping(path="/{id}", produces= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public UserRest getUser(@PathVariable String id) {
 		
-		UserRest returnValue = new UserRest();
-		
 		UserDto userDto = userService.getUserByUserId(id);
-		BeanUtils.copyProperties(userDto, returnValue);
+		
+		ModelMapper modelMapper = new ModelMapper();
+		UserRest returnValue = modelMapper.map(userDto, UserRest.class);
 		
 		return returnValue;
 	}
@@ -52,16 +64,17 @@ public class UserController {
 			produces= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
 	)
 	public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) throws Exception {
-
-		UserRest returnValue = new UserRest();
 		
 		if(userDetails.getFirstName().isEmpty()) throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 		
-		UserDto userDto = new UserDto();
-		BeanUtils.copyProperties(userDetails, userDto);
+//		UserDto userDto = new UserDto();
+//		BeanUtils.copyProperties(userDetails, userDto);
+		
+		ModelMapper modelMapper = new ModelMapper();
+		UserDto userDto =  modelMapper.map(userDetails, UserDto.class);
 		
 		UserDto createdUser = userService.createUser(userDto);
-		BeanUtils.copyProperties(createdUser, returnValue);
+		UserRest returnValue = modelMapper.map(createdUser, UserRest.class);
 		
 		return returnValue;
 		
@@ -115,6 +128,34 @@ public class UserController {
 		}
 		
 		return returnValue;
+		
+	}
+	
+//	http://localhost:8080/mobile-app-ws/users/jlglljgljljlg
+	@GetMapping(path="/{id}/addresses", produces= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public List<AddressesRest> getUserAddresses(@PathVariable String id) {
+		
+		List<AddressesRest> returnValue = new ArrayList<>();
+		
+		List<AddressDTO> addressesDTO = addressesService.getAddresses(id);
+		
+		if(addressesDTO != null && !addressesDTO.isEmpty()) {
+			
+			Type listType = new TypeToken<List<AddressesRest>>() {}.getType();
+			returnValue = new ModelMapper().map(addressesDTO, listType);
+		}
+		
+		
+		return returnValue;
+	}
+	
+	
+	@GetMapping(path="/{userId}/addresses/{addressId}", produces= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public AddressesRest getUserAddress(@PathVariable String addressId) {
+		
+		AddressDTO addressesDTO = addressService.getAddress(addressId);
+	
+		return new ModelMapper().map(addressesDTO, AddressesRest.class);
 		
 	}
 	
