@@ -1,4 +1,4 @@
-# Spring Boot CRUD BACKEND API with Authentication and AWS Deployment
+# Spring Boot CRUD Backend API with Authentication and AWS Deployment
 
 This project is a Spring Boot application showcasing a CRUD API with user authentication, powered by Spring Security. The application has been deployed on Amazon AWS using EC2 for hosting and Elastic Beanstalk for streamlined deployment.
 
