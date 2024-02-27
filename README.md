@@ -2,6 +2,9 @@
 
 This project is a Spring Boot application showcasing a CRUD API with user authentication, powered by Spring Security. The application has been deployed on Amazon AWS using EC2 for hosting and Elastic Beanstalk for streamlined deployment.
 
+# Technologies used in the project
+Spring Security, JPA, MySQL, HATEOAS, Amazon AWS (EC2, Elastic Beanstalk), Thymeleaf, Jackson Dataformat XML, Spring DevTools, ModelMapper, JUnit/TestNG, JWT, and Java 17.
+
 ## Key Components
 
 ### Exceptions
