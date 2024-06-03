@@ -173,9 +173,7 @@ public class UserServiceImpl implements UserService {
 					returnValue = true;
 				}
 			}
-
-		return false;
+			return returnValue;
 	}
-
 
 }
