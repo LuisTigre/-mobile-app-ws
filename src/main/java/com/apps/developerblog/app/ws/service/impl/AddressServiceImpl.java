@@ -5,7 +5,7 @@ import com.apps.developerblog.app.ws.io.entity.AddressEntity;
 import com.apps.developerblog.app.ws.io.entity.UserEntity;
 import com.apps.developerblog.app.ws.io.repositories.AddressRepository;
 import com.apps.developerblog.app.ws.io.repositories.UserRepository;
-import com.apps.developerblog.app.ws.security.shared.dto.AddressDTO;
+import com.apps.developerblog.app.ws.shared.dto.AddressDTO;
 import com.apps.developerblog.app.ws.service.AddressService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

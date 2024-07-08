@@ -1,4 +1,4 @@
-package com.apps.developerblog.app.ws.security.shared.dto;
+package com.apps.developerblog.app.ws.shared.dto;
 
 public class AddressDTO {
 

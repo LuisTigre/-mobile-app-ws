@@ -1,4 +1,4 @@
-package com.apps.developerblog.app.ws.security.shared;
+package com.apps.developerblog.app.ws.shared;
 
 import com.apps.developerblog.app.ws.security.SecurityConstants;
 import io.jsonwebtoken.Claims;

@@ -2,7 +2,7 @@ package com.apps.developerblog.app.ws.security;
 
 
 import com.apps.developerblog.app.ws.SpringApplicationContext;
-import com.apps.developerblog.app.ws.security.shared.dto.UserDto;
+import com.apps.developerblog.app.ws.shared.dto.UserDto;
 import com.apps.developerblog.app.ws.service.UserService;
 import com.apps.developerblog.app.ws.ui.model.request.UserLoginRequestModel;
 import com.fasterxml.jackson.databind.ObjectMapper;

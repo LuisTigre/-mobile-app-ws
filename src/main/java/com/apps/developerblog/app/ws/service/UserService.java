@@ -1,7 +1,7 @@
 package com.apps.developerblog.app.ws.service;
 
 
-import com.apps.developerblog.app.ws.security.shared.dto.UserDto;
+import com.apps.developerblog.app.ws.shared.dto.UserDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

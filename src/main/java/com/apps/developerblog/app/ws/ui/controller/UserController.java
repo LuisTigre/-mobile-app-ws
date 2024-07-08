@@ -2,8 +2,8 @@ package com.apps.developerblog.app.ws.ui.controller;
 
 
 import com.apps.developerblog.app.ws.exceptions.UserServiceException;
-import com.apps.developerblog.app.ws.security.shared.dto.AddressDTO;
-import com.apps.developerblog.app.ws.security.shared.dto.UserDto;
+import com.apps.developerblog.app.ws.shared.dto.AddressDTO;
+import com.apps.developerblog.app.ws.shared.dto.UserDto;
 import com.apps.developerblog.app.ws.service.AddressService;
 import com.apps.developerblog.app.ws.service.UserService;
 import com.apps.developerblog.app.ws.ui.model.request.UserDetailsRequestModel;
