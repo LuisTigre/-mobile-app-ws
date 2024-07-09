@@ -18,7 +18,9 @@ public class Utils {
 	
 	private final Random RANDOM = new SecureRandom();
 	private final String ALPHABET ="0123456789ABCDFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	
+
+
+
 	public String generatedUserId(int length) {
 		return generateRandomString(length);
 	}
@@ -54,7 +56,7 @@ public class Utils {
 
 	}
 
-	public String generateEmailVerificationToken(String userId){
+	public static String generateEmailVerificationToken(String userId){
 
 		// Generate JWT and add it to a Response Header
 		byte[] secretKeyBytes = SecurityConstants.getTokenSecret().getBytes();
@@ -68,5 +70,18 @@ public class Utils {
 
 		return token;
 	}
-	
+
+	public static String generatePasswordResetToken(String userId) {
+		// Generate JWT and add it to a Response Header
+		byte[] secretKeyBytes = SecurityConstants.getTokenSecret().getBytes();
+		SecretKey secretKey = Keys.hmacShaKeyFor(secretKeyBytes);
+
+		String token = Jwts.builder()
+				.subject(userId)
+				.expiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
+				.signWith(secretKey)
+				.compact();
+
+		return token;
+	}
 }

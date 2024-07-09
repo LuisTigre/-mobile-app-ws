@@ -77,11 +77,11 @@ public class UserDto implements Serializable {
 		this.encryptedPassword = encryptedPassword;
 	}
 
-	public String getEmailVerificatioToken() {
+	public String getEmailVerificationToken() {
 		return emailVerificatioToken;
 	}
 
-	public void setEmailVerificatioToken(String emailVerificatioToken) {
+	public void setEmailVerificationToken(String emailVerificatioToken) {
 		this.emailVerificatioToken = emailVerificatioToken;
 	}
 

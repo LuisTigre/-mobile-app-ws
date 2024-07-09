@@ -1,6 +1,6 @@
 package com.apps.developerblog.app.ws.ui.model.response;
 
-public class OperationsStatusModel {
+public class OperationStatusModel {
 	
 	private String operationResult;
 	private String operationName;

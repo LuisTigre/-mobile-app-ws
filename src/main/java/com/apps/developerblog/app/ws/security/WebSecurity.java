@@ -41,6 +41,8 @@ public class WebSecurity {
 				.authorizeHttpRequests((authz) -> authz
 						.requestMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL).permitAll()
 						.requestMatchers(HttpMethod.GET, SecurityConstants.VERIFICATION_EMAIL_URL).permitAll()
+						.requestMatchers(HttpMethod.POST, SecurityConstants.PASSWORD_RESET_REQUEST_URL).permitAll()
+						.requestMatchers(HttpMethod.POST, SecurityConstants.PASSWORD_RESET_URL).permitAll()
 						.anyRequest().authenticated())
 				.authenticationManager(authenticationManager)
 				.addFilter(authenticationFilter)
